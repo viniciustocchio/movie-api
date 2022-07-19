@@ -4,3 +4,13 @@ node_modules/
 # Ignore Logs
 logs
 *.log
+
+# The file containing environment variables 
+.env
+
+# Ignore IDE specific files
+.idea/
+.vscode/
+*.sw*
+#Ignore Workspace files
+.code-workspace
