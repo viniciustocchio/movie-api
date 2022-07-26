@@ -5,9 +5,173 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Documentation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
   <h1>Documentation</h1>
   <p>This app is a server-side component of a “movies” web application. The web application will provide users with access to information about different movies, directors, and genres. Users will be able to sign up, update their personal information, and create a list of their favorite movies.</p>
+  <table class="table table-bordered">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Number</th>
+        <th scope="col">Request</th>
+        <th scope="col">URL</th>
+        <th scope="col">HTTP Method</th>
+        <th scope="col">Request body data format</th>
+        <th scope="col">Response body data format</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>User Login page</td>
+        <td>/login</td>
+        <td>POST</td>
+        <td>Authorization Key-value pair by username and password</td>
+        <td>Get a JWT token that isused to authorize a user as Bearer Token</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Get a list of all movies-Authorized by bearer token</td>
+        <td>/movies</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data
+          about all the movies</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Get data about a
+          single movie by
+          title-Authorized by bearer token</td>
+        <td>/movies/[title]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td> A JSON object holding data about a single movie,containing an title, description,director, and genre
+          property.<br>
+          "Genre": {<br>
+          "Name": "Drama",<br>
+          "Description": "The film portrays the man's unique way of dealing with his new, torturous life"<br>
+          }<br>
+          "Title":"The Matrix"
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">4</th>
+        <td>Return genre by name-Authorize by bearer token</td>
+        <td>/movies/[genre]/[genreName]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about the genre class<br>
+          Example:{<br>
+          {<br>
+          "Name": "Drama",<br>
+          "Description": "The film portrays the man's unique way of dealing with his new, torturous life"<br>
+          }<br>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">5</th>
+        <td>Get data about director by name-Authorize by bearer token</td>
+        <td>/movies/[directors]/[directorName]</td>
+        <td>GET</td>
+        <td>None</td>
+        <td>A JSON object holding data about a director.Example<br>
+          {<br>
+          "name": "Sidney Lumet",<br>
+          "Birth Year": "1970",<br>
+          "Bio": "Sidney Lumet was a master of cinema, best known for his technical knowledge and his skill at getting
+          first-rate performances from his actors"<br>
+          }
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">6</th>
+        <td>Add a new user</td>
+        <td>/users</td>
+        <td>POST</td>
+        <td>A JSON object holding
+          data about the user to
+          add, structured like:<br>
+          {<br>
+          "name" : "Jack",<br>
+          "password" : 2345,<br>
+          "email" : "jack@gmail.com"<br>
+          "Birthdate": "1998-06-03"<br>
+          "favoriteMovies":[]<br>
+          }
+        </td>
+        <td>A JSON object holding data
+          about the user that was
+          added, including an ID:Example<br>
+          {<br>
+          "id":3,<br>
+          "name" : "Jack",<br>
+          "password" : 2345,<br>
+          "email" : "jack@gmail.com"<br>
+          "Birthdate": "1998-06-03"<br>
+          "favoriteMovies":[]<br>
+          }<br>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">7</th>
+        <td>update user name</td>
+        <td>/users/[name]</td>
+        <td>PUT</td>
+        <td>A JSON object holding data to update. Example<br>
+          {<br>
+          "name":"swati"<br>
+          "password" : 2349,<br>
+          "email" : "swati@gmail.com"<br>
+          "Birthdate": "1998-06-02"<br>
+          }<br>
+        </td>
+        <td>A JSON object holding the updated user Example:<br>
+          {<br>
+          "id": "2",<br>
+          "name":"swati"<br>
+          "password" : 2349,<br>
+          "email" : "swati@gmail.com"<br>
+          "Birthdate": "1998-06-02"<br>
+          }<br>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">8</th>
+        <td>Add movie to favorites list of user-Authorize by bearer token</td>
+        <td>[users]/[name]/[movies]/[MovieID]</td>
+        <td>POST</td>
+        <td>None</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">9</th>
+        <td>Remove a movie from list of favourites-Authorize by bearer token</td>
+        <td>/users/[name]/[movies]/[movieID]</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A JSON object holding updated user<br>
+          "_id": "6294b3ac94326ea059c642c5",<br>
+          "name": "sagar",<br>
+          "password": 7865,<br>
+          "email": "sagarpanchal@yahoo.com",<br>
+          "Birthdate": "1995-05-02T00:00:00.000Z",<br>
+          "favoriteMovies": []<br>
+
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">10</th>
+        <td>De-registering a user</td>
+        <td>/users/id</td>
+        <td>DELETE</td>
+        <td>None</td>
+        <td>A text message indicating
+          user has been successfully removed</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
