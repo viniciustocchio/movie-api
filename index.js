@@ -124,6 +124,7 @@ let directors = [
 ];
 
 //CREAT
+//USERS
 app.post("/users", (req, res) => {
   const newUser = req.body;
 
@@ -133,6 +134,33 @@ app.post("/users", (req, res) => {
     res.status(201).json(newUser);
   } else {
     res.status(400).send("user need names");
+  }
+});
+
+//MOVIES
+app.post("/users/:id/:movieTitle", (req, res) => {
+  const { id, movieTitle } = req.params;
+
+  let user = users.find((user) => user.id == id);
+
+  if (user) {
+    user.favoriteMovies.push(movieTitle);
+    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
+  } else {
+    res.status(400).send("no such user");
+  }
+});
+
+//DIRECTORS
+app.post('/movies/directors/:directorName', (req, res) => {
+  const newDirector = req.body;
+
+  if (newDirector.name) {
+    newDirector.id = uuid.v4();
+    directors.push(newDirector);
+    res.status(201).json(newDirector);
+  } else {
+    res.status(400).send("director need names");
   }
 });
 
@@ -151,17 +179,18 @@ app.put("/users/:id", (req, res) => {
   }
 });
 
-//CREAT
-app.post("/users/:id/:movieTitle", (req, res) => {
-  const { id, movieTitle } = req.params;
+//DIRECTOR
+app.put('/movies/directors/:directorName', (req, res) => {
+  const { id } = req.params;
+  const updatedDirector = req.body;
 
-  let user = users.find((user) => user.id == id);
+  let director = udirectors.find((director) => director.id == id);
 
-  if (user) {
-    user.favoriteMovies.push(movieTitle);
-    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
+  if (director) {
+    director.name = updatedDirector.name;
+    res.status(200).json(director);
   } else {
-    res.status(400).send("no such user");
+    res.status(400).send("no such director");
   }
 });
 
@@ -183,7 +212,6 @@ app.delete("/users/:id/:movieTitle", (req, res) => {
   }
 });
 
-//DELETE
 app.delete("/users/:id", (req, res) => {
   const { id } = req.params;
 
