@@ -24,63 +24,102 @@ let users = [
 let movies = [
   {
     Title: "Inglorious Basterds",
+    Description: "A few Jewish soldiers are on an undercover mission to bring down the Nazi government and put an end to the war.",
     Genre: {
       Name: "War",
     },
+    Director: {
+      Name: "Quentin Tarantino"
+    },
+    Image: "https://upload.wikimedia.org/wikipedia/en/c/c3/Inglourious_Basterds_poster.jpg"
   },
   {
     Title: "Lord of the Rings",
+    Description: "A young hobbit, Frodo, who has found the One Ring that belongs to the Dark Lord Sauron, begins his journey with eight companions to Mount Doom, the only place where it can be destroyed.",
     Genre: {
       Name: "Adventure",
     },
+    Director: {
+      Name: "Peter Jackson"
+    },
+    Image: "https://upload.wikimedia.org/wikipedia/en/8/8a/The_Lord_of_the_Rings_The_Fellowship_of_the_Ring_%282001%29.jpg"
   },
   {
     Title: "Harry Potter",
+    Description: "Harry Potter is a film series based on the eponymous novels by J. K. Rowling. ",
     Genre: {
       Name: "Fantasy",
     },
+    Director: {
+      Name: "Chris Columbus"
+    },
+    Image: "https://static.wikia.nocookie.net/harrypotter/images/f/fb/PS_poster.jpg/revision/latest/scale-to-width-down/338?cb=20180318153750"
   },
   {
     Title: "The Avengers",
+    Description: "Nick Fury is compelled to launch the Avengers Initiative when Loki poses a threat to planet Earth.",
     Genre: {
       Name: "Action",
     },
+    Director: {
+      Name: "Joss Whedon"
+    },
+    Image: "https://upload.wikimedia.org/wikipedia/en/8/8a/The_Avengers_%282012_film%29_poster.jpg"
   },
   {
     Title: "The Dark Knight",
+    Description: "After Gordon, Dent and Batman begin an assault on Gotham's organised crime, the mobs hire the Joker, a psychopathic criminal mastermind who offers to kill Batman and bring the city to its knees.",
     Genre: {
       Name: "Action",
     },
+    Director: {
+      Name: "Christopher Nolan"
+    },
+    Image: "https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg"
   },
   {
     Title: "Interstellar",
+    Description: "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
     Genre: {
-      Name: "Adventure",
+      Name: "Sci-fi",
     },
+    Director: {
+      Name: "Christopher Nolan"
+    },
+    Image: "https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg"
+  },
+];
+
+let directors = [
+  {
+    name: "Quentin Tarantino",
+    bio: "Quentin Jerome Tarantino is an American filmmaker, actor, film critic and author.",
+    birth year: "1963",
+    death year: Null,
   },
   {
-    Title: "Toy Story",
-    Genre: {
-      Name: "Comedy",
-    },
+    name: "Peter Jackson",
+    bio: "Sir Peter Robert Jackson ONZ KNZM is a New Zealand film director, screenwriter and producer.",
+    birth year: "1961",
+    death year: Null,
   },
   {
-    Title: "Jurassic Park",
-    Genre: {
-      Name: "Adventure",
-    },
+    name: "Chris Columbus",
+    bio: "Chris Joseph Columbus is an American filmmaker.",
+    birth year: "1958",
+    death year: Null,
   },
   {
-    Title: "Star Wars",
-    Genre: {
-      Name: "Fantasy",
-    },
+    name: "Joss Whedon",
+    bio: "Joseph Hill Whedon is an American filmmaker, composer, and comic book writer.",
+    birth year: "1964",
+    death year: Null,
   },
   {
-    Title: "Forest Gump",
-    Genre: {
-      Name: "Drama",
-    },
+    name: "Christopher Nolan",
+    bio: "Christopher Nolan CBE is a British-American film director, producer, and screenwriter.",
+    birth year: "1970",
+    death year: Null,
   },
 ];
 
