@@ -94,32 +94,32 @@ let directors = [
   {
     name: "Quentin Tarantino",
     bio: "Quentin Jerome Tarantino is an American filmmaker, actor, film critic and author.",
-    birth year: "1963",
-    death year: Null,
+    birthYear: "1963",
+    deathYear: null,
   },
   {
     name: "Peter Jackson",
     bio: "Sir Peter Robert Jackson ONZ KNZM is a New Zealand film director, screenwriter and producer.",
-    birth year: "1961",
-    death year: Null,
+    birthYear: "1961",
+    deathYear: null,
   },
   {
     name: "Chris Columbus",
     bio: "Chris Joseph Columbus is an American filmmaker.",
-    birth year: "1958",
-    death year: Null,
+    birthYear: "1958",
+    deathYear: null,
   },
   {
     name: "Joss Whedon",
     bio: "Joseph Hill Whedon is an American filmmaker, composer, and comic book writer.",
-    birth year: "1964",
-    death year: Null,
+    birthYear: "1964",
+    deathYear: null,
   },
   {
     name: "Christopher Nolan",
     bio: "Christopher Nolan CBE is a British-American film director, producer, and screenwriter.",
-    birth year: "1970",
-    death year: Null,
+    birthYear: "1970",
+    deathYear: null,
   },
 ];
 
@@ -151,18 +151,6 @@ app.post("/users/:id/:movieTitle", (req, res) => {
   }
 });
 
-//DIRECTORS
-app.post('/movies/directors/:directorName', (req, res) => {
-  const newDirector = req.body;
-
-  if (newDirector.name) {
-    newDirector.id = uuid.v4();
-    directors.push(newDirector);
-    res.status(201).json(newDirector);
-  } else {
-    res.status(400).send("director need names");
-  }
-});
 
 //UPDATE
 app.put("/users/:id", (req, res) => {
@@ -176,21 +164,6 @@ app.put("/users/:id", (req, res) => {
     res.status(200).json(user);
   } else {
     res.status(400).send("no such user");
-  }
-});
-
-//DIRECTOR
-app.put('/movies/directors/:directorName', (req, res) => {
-  const { id } = req.params;
-  const updatedDirector = req.body;
-
-  let director = udirectors.find((director) => director.id == id);
-
-  if (director) {
-    director.name = updatedDirector.name;
-    res.status(200).json(director);
-  } else {
-    res.status(400).send("no such director");
   }
 });
 
@@ -274,3 +247,13 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
+
+app.get("/movies/directors/:directorName", (req, res) => {
+  const { directorName} = req.params;
+   const director = directors.find((director) => director.name === directorName);
+   if (director) {
+     res.status(200).json(director);
+   } else {
+     res.status(400).send("no such director");
+   }
+ });
