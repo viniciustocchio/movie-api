@@ -13,7 +13,7 @@ let movieSchema = mongoose.Schema({
   },
   Actors: [String],
   ImagePath: String,
-  Featired: Boolen,
+  Featired: Boolean,
 });
 
 let userSchema = mongoose.Schema({
@@ -24,7 +24,7 @@ let userSchema = mongoose.Schema({
   FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, re: "Movie" }],
 });
 
-let Movie = mongoose.model("Movie", moviesSchema);
+let Movie = mongoose.model("Movie", movieSchema);
 let User = mongoose.model("User", userSchema);
 
 module.exports.Movies = Movie;
