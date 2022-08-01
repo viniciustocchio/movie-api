@@ -217,8 +217,4 @@ app.listen(8080, () => {
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 03f9af4d17ac266092623ff8760490aec640f0f9
