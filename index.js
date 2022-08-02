@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Models = require("./models.js");
+const Models = require("./model.js");
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -226,6 +226,33 @@ let movies = [
 ];
 
 //CREAT
+app.post("/users", (req, res) => {
+  Users.findOne({ username: req.body.username })
+    .then((user) => {
+      if (user) {
+        return res.status(400).send(req.body.username + "already exists");
+      } else {
+        Users.create({
+          username: req.body.username,
+          password: req.body.password,
+          email: req.body.email,
+          Birthday: req.body.Birthday,
+        })
+          .then((user) => {
+            res.status(201).json(user);
+          })
+          .catch((error) => {
+            console.error(error);
+            res.status(500).send("Error: " + error);
+          });
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).send("Error: " + error);
+    });
+});
+
 app.post("/users", (req, res) => {
   const newUser = req.body;
 
