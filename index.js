@@ -238,6 +238,19 @@ app.post("/users", (req, res) => {
   }
 });
 
+app.post("/users/:id/:movieTitle", (req, res) => {
+  const { id, movieTitle } = req.params;
+
+  let user = users.find((user) => user.id == id);
+
+  if (user) {
+    user.favoriteMovies.push(movieTitle);
+    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
+  } else {
+    res.status(400).send("no such user");
+  }
+});
+
 //UPDATE
 app.put("/users/:id", (req, res) => {
   const { id } = req.params;
@@ -248,20 +261,6 @@ app.put("/users/:id", (req, res) => {
   if (user) {
     user.name = updatedUser.name;
     res.status(200).json(user);
-  } else {
-    res.status(400).send("no such user");
-  }
-});
-
-//CREAT
-app.post("/users/:id/:movieTitle", (req, res) => {
-  const { id, movieTitle } = req.params;
-
-  let user = users.find((user) => user.id == id);
-
-  if (user) {
-    user.favoriteMovies.push(movieTitle);
-    res.status(200).send(`${movieTitle} has been added to user ${id}'s array`);
   } else {
     res.status(400).send("no such user");
   }
@@ -285,7 +284,6 @@ app.delete("/users/:id/:movieTitle", (req, res) => {
   }
 });
 
-//DELETE
 app.delete("/users/:id", (req, res) => {
   const { id } = req.params;
 
@@ -330,15 +328,34 @@ app.get("/movies/genre/:genreName", (req, res) => {
   }
 });
 
-app.get("/movies/directors/:directorName", (req, res) => {
-  const { directorName} = req.params;
-   const director = directors.find((director) => director.name === directorName);
+app.get("/movies/director/:name", (req, res) => {
+  const {name} = req.params;
+   const director = director.find((director) => director.name === Name);
    if (director) {
      res.status(200).json(director);
    } else {
      res.status(400).send("no such director");
    }
  });
+
+ app.get("/users", (req, res) => {
+  res.json(users);
+});
+
+app.get("/users", (req, res) => {
+  res.status(200).json(users);
+});
+
+app.get("/users/:username", (req, res) => {
+  const { username } = req.params;
+  const user = users.find((user) => user.Username === username);
+
+  if (user) {
+    res.status(200).json(user);
+  } else {
+    res.status(400).send("no such user");
+  }
+});
 
 //step 2.3
 app.get("/", function (req, res) {
@@ -358,3 +375,13 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something broke!");
 });
+
+try {
+  mongoose.connect("mongodb://localhost:27017/database name", {
+ useNewUrlParser: true,
+ useUnifiedTopology: true,
+});
+
+} catch (e) {
+   console.log(e,"can not connect to mongodb");
+};
