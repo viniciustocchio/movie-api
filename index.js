@@ -21,20 +21,50 @@ app.use(morgan("combined"));
 
 let users = [
   {
-    id: 1,
-    name: "Andrea",
-    favoriteMovies: [],
+    id: "62c862269bc75c5e27c7a4dc",
+    Username: "Andrea",
+    Password: "1234",
+    Email: "and@gmail.com",
+    Birthday: "1985-02-19",
+    favoriteMovies: ["Silence of the Lambs", "Inception", "Dunkirk"]
   },
   {
-    id: 2,
-    name: "Felipe",
-    favoriteMovies: ["Star Wars"],
+    id: "62c862269bc75c5e27c7a4dc",
+    Username: "Felipe",
+    Password: "4567",
+    Email: "feli@gmail.com",
+    Birthday: "1984-04-26",
+    favoriteMovies: ["Inception", "Saving Private Ryan"]
+  },
+  {
+    id: "62c862269bc75c5e27c7a4de",
+    Username: "Icaro",
+    Password: "4732",
+    Email: "ic@hotmail.com",
+    Birthday: "1988-05-13",
+    favoriteMovies: ["Toy Story", "Indiana Jones and the Raiders of the Lost Ark"]
+  },
+  {
+    id: "62c862269bc75c5e27c7a4df",
+    Username: "Rosa",
+    Password: "4562",
+    Email: "rosa@hotmail.com",
+    Birthday: "1978-05-16",
+    favoriteMovies: ["Jurassic Park", "Toy Story"]
+  },
+  {
+    id: "62c862279bc75c5e27c7a4e0",
+    Username: "Regina",
+    Password: "1543",
+    Email: "reg@yahoo.com",
+    Birthday: "1970-11-14",
+    favoriteMovies: ["Tenet", "Dunkirk", "Saving Private Ryan"]
   },
 ];
 
 let movies = [
   {
-    _id: "62c862259bc75c5e27c7a4d2",
+    id: "62c862259bc75c5e27c7a4d2",
     Title: "Silence of the Lambs",
     Description: "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.",
     Genre: {
@@ -50,7 +80,7 @@ let movies = [
     ImagePath: "https://upload.wikimedia.org/wikipedia/en/8/86/The_Silence_of_the_Lambs_poster.jpg"
   },
   {
-    _id: "62c862259bc75c5e27c7a4d3",
+    id: "62c862259bc75c5e27c7a4d3",
     Title: "Interstellar",
     Description: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
     Genre: {
@@ -66,7 +96,7 @@ let movies = [
     ImagePath: "https://upload.wikimedia.org/wikipedia/en/b/bc/Interstellar_film_poster.jpg"
   },
   {
-    _id: "62c862259bc75c5e27c7a4d4",
+    id: "62c862259bc75c5e27c7a4d4",
     Title: "Tenet",
     Description: "Armed with only one word, Tenet, and fighting for the survival of the entire world, a Protagonist journeys through a twilight world of international espionage on a mission that will unfold in something beyond real time.",
     Genre: {
@@ -82,7 +112,7 @@ let movies = [
     ImagePath: "https://upload.wikimedia.org/wikipedia/en/thumb/1/14/Tenet_movie_poster.jpg/220px-Tenet_movie_poster.jpg"
   },
   {
-    _id: "62c862259bc75c5e27c7a4d5",
+    id: "62c862259bc75c5e27c7a4d5",
     Title: "Inception",
     Description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.",
     Genre: {
@@ -98,7 +128,7 @@ let movies = [
     ImagePath: "https://upload.wikimedia.org/wikipedia/en/2/2e/Inception_%282010%29_theatrical_poster.jpg"
   },
   {
-    _id: "62c862259bc75c5e27c7a4d6",
+    id: "62c862259bc75c5e27c7a4d6",
     Title: "Dunkirk",
     Description: "Allied soldiers from Belgium, the British Commonwealth and Empire, and France are surrounded by the German Army and evacuated during a fierce battle in World War II.",
     Genre: {
@@ -114,7 +144,7 @@ let movies = [
     ImagePath: "https://upload.wikimedia.org/wikipedia/en/1/15/Dunkirk_Film_poster.jpg"
   },
   {
-    _id: "62c862259bc75c5e27c7a4d7",
+    id: "62c862259bc75c5e27c7a4d7",
     Title: "The Manchurian Candidate",
     Description: "In the midst of the Gulf War, soldiers are kidnapped and brainwashed for sinister purposes.",
     Genre: {
@@ -130,7 +160,7 @@ let movies = [
     ImagePath: "https://upload.wikimedia.org/wikipedia/en/thumb/1/17/The_Manchurian_Candidate_poster.jpg/220px-The_Manchurian_Candidate_poster.jpg"
   },
   {
-    _id: "62c862259bc75c5e27c7a4d8",
+    id: "62c862259bc75c5e27c7a4d8",
     Title: "Saving Private Ryan",
     Description: "Following the Normandy Landings, a group of U.S. soldiers go behind enemy lines to retrieve a paratrooper whose brothers have been killed in action.",
     Genre: {
@@ -146,7 +176,7 @@ let movies = [
     ImagePath: "https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/Saving_Private_Ryan_poster.jpg/220px-Saving_Private_Ryan_poster.jpg"
   },
   {
-    _id: "62c862259bc75c5e27c7a4d9",
+    id: "62c862259bc75c5e27c7a4d9",
     Title: "Indiana Jones and the Raiders of the Lost Ark",
     Description: "In 1936, archaeologist and adventurer Indiana Jones is hired by the U.S. government to find the Ark of the Covenant before Adolf Hitler's Nazis can obtain its awesome powers.",
     Genre: {
@@ -162,7 +192,7 @@ let movies = [
     ImagePath: "https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Raiders_of_the_Lost_Ark_Theatrical_Poster.jpg/220px-Raiders_of_the_Lost_Ark_Theatrical_Poster.jpg"
   },
   {
-    _id: "62c862269bc75c5e27c7a4da",
+    id: "62c862269bc75c5e27c7a4da",
     Title: "Jurassic Park",
     Description: "A pragmatic paleontologist touring an almost complete theme park on an island in Central America is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
     Genre: {
@@ -178,7 +208,7 @@ let movies = [
     ImagePath: "https://upload.wikimedia.org/wikipedia/en/e/e7/Jurassic_Park_poster.jpg"
   },
   {
-    _id: "62c862269bc75c5e27c7a4db",
+    id: "62c862269bc75c5e27c7a4db",
     Title: "Toy Story",
     Description: "A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy's room.",
     Genre: {
