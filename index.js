@@ -9,6 +9,11 @@ const bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+let auth = require("./auth")(app);
+
+const passport = require("passport");
+require("./passport");
+
 const mongoose = require("mongoose");
 
 const Models = require("./models.js");
@@ -34,7 +39,7 @@ app.post("/users", (req, res) => {
           username: req.body.username,
           password: req.body.password,
           email: req.body.email,
-          Birthday: req.body.Birthday,
+          birthday: req.body.birthday,
         })
           .then((user) => {
             res.status(201).json(user);
@@ -121,16 +126,20 @@ app.use((err, req, res, next) => {
 });
 
 //READ - Shows a list of all the movies
-app.get("/movies", (req, res) => {
-  Movies.find()
-    .then((movies) => {
-      res.status(201).json(movies);
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send("Error: " + err);
-    });
-});
+app.get(
+  "/movies",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Movies.find()
+      .then((movies) => {
+        res.status(201).json(movies);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
+      });
+  }
+);
 
 //READ - Shows a certain movie title
 app.get("/movies/:title", (req, res) => {
@@ -177,7 +186,7 @@ app.put("/users/:username", (req, res) => {
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
-        Birthday: req.body.Birthday,
+        birthday: req.body.birthday,
         FavouriteMovies: req.body.FavouriteMovies,
       },
     },
