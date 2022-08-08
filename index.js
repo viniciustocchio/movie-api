@@ -126,6 +126,18 @@ app.use((err, req, res, next) => {
 });
 
 //READ - Shows a list of all the movies
+app.get("/users", (req, res) => {
+  Users.find()
+    .then((users) => {
+      res.status(201).json(users);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+//READ - Shows a list of all the movies
 app.get(
   "/movies",
   passport.authenticate("jwt", { session: false }),
