@@ -126,3 +126,6 @@ Timestamp: Fri Jul 01 2022 17:15:49 GMT+0200 (Central European Summer Time)
 ::1 - - [08/Aug/2022:08:47:37 +0000] "GET /users HTTP/1.1" 201 2 "-" "PostmanRuntime/7.29.2"
 ::1 - - [08/Aug/2022:08:57:51 +0000] "GET /users HTTP/1.1" 201 350 "-" "PostmanRuntime/7.29.2"
 ::1 - - [08/Aug/2022:11:02:54 +0000] "GET /users HTTP/1.1" 201 350 "-" "PostmanRuntime/7.29.2"
+::1 - - [08/Aug/2022:11:10:49 +0000] "GET /movies HTTP/1.1" 201 7251 "-" "PostmanRuntime/7.29.2"
+::1 - - [08/Aug/2022:11:11:14 +0000] "GET /movies/Inception HTTP/1.1" 200 415 "-" "PostmanRuntime/7.29.2"
+::1 - - [08/Aug/2022:11:11:30 +0000] "GET /movies/genre/Adventure HTTP/1.1" 200 201 "-" "PostmanRuntime/7.29.2"
