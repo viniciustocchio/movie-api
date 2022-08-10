@@ -39,6 +39,8 @@ const Models = require("./models.js");
 const Movies = Models.Movie;
 const Users = Models.User;
 
+const { check, validationResult } = require("express-validator");
+
 try {
   mongoose.connect("mongodb://localhost:27017/myflixdatabase", {
     useNewUrlParser: true,
@@ -50,8 +52,24 @@ try {
 
 app.post(
   "/users",
+  [
+    check("Username", "Username is required").isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - not allowed."
+    ).isAlphanumeric(),
+    check("Password", "Password is required").not().isEmpty(),
+    check("Email", "Email does not appear to be valid").isEmail(),
+  ],
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    let errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOne({ username: req.body.username })
       .then((user) => {
         if (user) {
@@ -152,8 +170,9 @@ app.get(
 app.use(express.static("public"));
 
 // listen for requests
-app.listen(8080, () => {
-  console.log("Your app is listening on port 8080.");
+const port = process.env.PORT || 8080;
+app.listen(port, "0.0.0.0", () => {
+  console.log("Listening on Port " + port);
 });
 app.use((err, req, res, next) => {
   console.error(err.stack);
