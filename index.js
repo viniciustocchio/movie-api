@@ -42,7 +42,7 @@ const Users = Models.User;
 const { check, validationResult } = require("express-validator");
 
 try {
-  mongoose.connect("mongodb://localhost:27017/myflixdatabase", {
+  mongoose.connect(process.env.CONNECTION_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
