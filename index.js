@@ -75,10 +75,10 @@ app.post(
           return res.status(400).send(req.body.username + "already exists");
         } else {
           Users.create({
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-            birthday: req.body.birthday,
+            username: req.body.Username,
+            password: req.body.Password,
+            email: req.body.Email,
+            birthday: req.body.Birthday,
           })
             .then((user) => {
               res.status(201).json(user);
@@ -158,12 +158,9 @@ app.get("/", (req, res) => {
   res.send("Welcome to my movie website!");
 });
 
-app.get(
-  "/documentation",
-  (req, res) => {
-    res.sendFile("public/documentation.html", { root: __dirname });
-  }
-);
+app.get("/documentation", (req, res) => {
+  res.sendFile("public/documentation.html", { root: __dirname });
+});
 
 app.use(express.static("public"));
 
