@@ -191,16 +191,20 @@ app.get(
 );
 
 //READ - Shows a list of all the movies
-app.get("/movies", function (req, res) {
+app.get(
+  "/movies",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
     Movies.find()
-      .then(function (movies) {
+      .then((movies) => {
         res.status(201).json(movies);
       })
-      .catch(function (error) {
-        console.error(error);
-        res.status(500).send("Error: " + error);
+      .catch((err) => {
+        console.error(err);
+        res.status(500).send("Error: " + err);
       });
-  });
+  }
+);
 
 //READ - Shows a certain movie title
 app.get(
