@@ -41,6 +41,7 @@ const Users = Models.User;
 
 const { check, validationResult } = require("express-validator");
 
+HEAD
 try {
   mongoose.connect('mongodb://localhost:27017/dbname', {
     useNewUrlParser: true,
@@ -48,8 +49,20 @@ try {
   });
 } catch {
   console.log("can not conntact to db");
-}
 
+//try {
+ // mongoose.connect('mongodb+srv://viniciustocchiodb:1234@myflixdb.22srpoj.mongodb.net/?retryWrites=true&w=majority', {
+ //   useNewUrlParser: true,
+ //   useUnifiedTopology: true,
+ // });
+//} catch {
+ // console.log("can not conntact to db");
+//}
+try{
+  mongoose.connect('mongodb://localhost:27017/dbname', { useNewUrlParser: true, useUnifiedTopology: true });
+}catch{
+  console.log("db connection not working")
+}
 app.post(
   "/users",
   [
@@ -347,4 +360,4 @@ app.delete(
         res.status(500).send("Error: " + err);
       });
   }
-);
+)};
