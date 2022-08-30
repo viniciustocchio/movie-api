@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require("cors");
 
-let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
+let allowedOrigins = ["http://localhost:8080","http://localhost:1234", "http://testsite.com"];
 
 app.use(
   cors({
@@ -42,7 +42,7 @@ const Users = Models.User;
 const { check, validationResult } = require("express-validator");
 
 try {
-  mongoose.connect(process.env.CONNECTION_URI, {
+  mongoose.connect('mongodb://localhost:27017/dbname', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -98,7 +98,7 @@ app.post(
 
 app.post(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
+  //passport.authenticate("jwt", { session: false }),
   (req, res) => {
     try {
       Movies.create({
@@ -129,7 +129,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 
 app.post(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
+ // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     try {
       Movies.create({
