@@ -49,11 +49,13 @@ const { check, validationResult } = require("express-validator");
 //} catch {
  // console.log("can not conntact to db");
 //}
+
 try{
   mongoose.connect('mongodb://localhost:27017/dbname', { useNewUrlParser: true, useUnifiedTopology: true });
 }catch{
   console.log("db connection not working")
 }
+
 app.post(
   "/users",
   [
