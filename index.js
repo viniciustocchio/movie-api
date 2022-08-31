@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require("cors");
 
-let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
+let allowedOrigins = ["http://localhost:8080","http://localhost:1234", "http://testsite.com"];
 
 app.use(
   cors({
@@ -40,6 +40,15 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 const { check, validationResult } = require("express-validator");
+
+HEAD
+try {
+  mongoose.connect('mongodb://localhost:27017/dbname', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
+} catch {
+  console.log("can not conntact to db");
 
 //try {
  // mongoose.connect('mongodb+srv://viniciustocchiodb:1234@myflixdb.22srpoj.mongodb.net/?retryWrites=true&w=majority', {
@@ -104,7 +113,7 @@ app.post(
 
 app.post(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
+  //passport.authenticate("jwt", { session: false }),
   (req, res) => {
     try {
       Movies.create({
@@ -135,7 +144,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 
 app.post(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
+ // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     try {
       Movies.create({
@@ -353,4 +362,4 @@ app.delete(
         res.status(500).send("Error: " + err);
       });
   }
-);
+)};
