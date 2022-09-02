@@ -71,31 +71,35 @@ app.post(
         check("Email", "Email does not appear to be valid").isEmail(),
     ],
     (req, res) => {
-        // let errors = validationResult(req);
+         let errors = validationResult(req);
 
-        // if (!errors.isEmpty()) {
-        //   return res.status(422).json({ errors: errors.array() });
-        // }
+        if (!errors.isEmpty()) {
+          return res.status(422).json({ errors: errors.array() });
+        }
 
         let hashedPassword = Users.hashPassword(req.body.Password);
         console.log(req.body);
-        Users.findOne({Username: req.body.Username})
+        Users.findOne({username: req.body.Username})
             .then((user) => {
                 if (user) {
-                    return res.status(400).send(req.body.Username + "already exists");
+                    return res.status(400).json({message:req.body.Username + "already exists"});
                 } else {
                     Users.create({
-                        Username: req.body.Username,
-                        Password: hashedPassword,
-                        Email: req.body.Email,
-                        Birthday: req.body.Birthday,
+                        username: req.body.Username,
+                        password: hashedPassword,
+                        email: req.body.Email,
+                        birthday: req.body.Birthday,
                     })
                         .then((user) => {
                             res.status(201).json(user);
                         })
                         .catch((error) => {
                             console.error(error);
-                            res.status(500).send("Error: " + error);
+                            res.status(500).json(
+                                {
+                                    message:"Failed to register user: ",
+                                error: error}
+                            );
                         });
                 }
             })
