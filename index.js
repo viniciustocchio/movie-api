@@ -11,7 +11,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const cors = require("cors");
 
-let allowedOrigins = ["http://localhost:8080","http://localhost:1234", "http://testsite.com"];
+let allowedOrigins = [
+  "http://localhost:8080",
+  "http://localhost:1234",
+  "http://testsite.com",
+];
 
 app.use(
   cors({
@@ -41,28 +45,18 @@ const Users = Models.User;
 
 const { check, validationResult } = require("express-validator");
 
-HEAD
 try {
-  mongoose.connect('mongodb://localhost:27017/dbname', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
+  mongoose.connect(
+    "mongodb+srv://viniciustocchiodb:1234@myflixdb.22srpoj.mongodb.net/?retryWrites=true&w=majority",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  );
 } catch {
   console.log("can not conntact to db");
-
-//try {
- // mongoose.connect('mongodb+srv://viniciustocchiodb:1234@myflixdb.22srpoj.mongodb.net/?retryWrites=true&w=majority', {
- //   useNewUrlParser: true,
- //   useUnifiedTopology: true,
- // });
-//} catch {
- // console.log("can not conntact to db");
-//}
-try{
-  mongoose.connect('mongodb://localhost:27017/dbname', { useNewUrlParser: true, useUnifiedTopology: true });
-}catch{
-  console.log("db connection not working")
 }
+
 app.post(
   "/users",
   [
@@ -75,21 +69,22 @@ app.post(
     check("Email", "Email does not appear to be valid").isEmail(),
   ],
   (req, res) => {
-    let errors = validationResult(req);
+    // let errors = validationResult(req);
 
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
-    }
+    // if (!errors.isEmpty()) {
+    //   return res.status(422).json({ errors: errors.array() });
+    // }
 
     let hashedPassword = Users.hashPassword(req.body.Password);
-    Users.findOne({ username: req.body.username })
+    console.log(req.body);
+    Users.findOne({ Username: req.body.Username })
       .then((user) => {
         if (user) {
-          return res.status(400).send(req.body.username + "already exists");
+          return res.status(400).send(req.body.Username + "already exists");
         } else {
           Users.create({
             Username: req.body.Username,
-            Password: req.body.Password,
+            Password: hashedPassword,
             Email: req.body.Email,
             Birthday: req.body.Birthday,
           })
@@ -142,7 +137,7 @@ app.use(morgan("combined", { stream: accessLogStream }));
 
 app.post(
   "/movies",
- // passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     try {
       Movies.create({
@@ -177,16 +172,6 @@ app.get("/documentation", (req, res) => {
 
 app.use(express.static("public"));
 
-// listen for requests
-const port = process.env.PORT || 8080;
-app.listen(port, "0.0.0.0", () => {
-  console.log("Listening on Port " + port);
-});
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send("Something broke!");
-});
-
 //READ - Shows a list of all the movies
 app.get(
   "/users",
@@ -204,20 +189,16 @@ app.get(
 );
 
 //READ - Shows a list of all the movies
-app.get(
-  "/movies",
-  function
-  (req, res) {
-    Movies.find()
-      .then(function (movies) {
-        res.status(201).json(movies);
-      })
-      .catch(function (error) {
-        console.error(error);
-        res.status(500).send("Error: " + error);
-      });
-  }
-);
+app.get("/movies", function (req, res) {
+  Movies.find()
+    .then(function (movies) {
+      res.status(201).json(movies);
+    })
+    .catch(function (error) {
+      console.error(error);
+      res.status(500).send("Error: " + error);
+    });
+});
 
 //READ - Shows a certain movie title
 app.get(
@@ -360,4 +341,14 @@ app.delete(
         res.status(500).send("Error: " + err);
       });
   }
-)};
+);
+
+// listen for requests
+const port = process.env.PORT || 8080;
+app.listen(port, "0.0.0.0", () => {
+  console.log("Listening on Port " + port);
+});
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send("Something broke!");
+});
