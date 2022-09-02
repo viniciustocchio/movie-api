@@ -55,6 +55,23 @@ try {
   );
 } catch {
   console.log("can not conntact to db");
+<<<<<<< HEAD
+=======
+
+//try {
+ // mongoose.connect('mongodb+srv://viniciustocchiodb:1234@myflixdb.22srpoj.mongodb.net/?retryWrites=true&w=majority', {
+ //   useNewUrlParser: true,
+ //   useUnifiedTopology: true,
+ // });
+//} catch {
+ // console.log("can not conntact to db");
+//}
+
+try{
+  mongoose.connect('mongodb://localhost:27017/dbname', { useNewUrlParser: true, useUnifiedTopology: true });
+}catch{
+  console.log("db connection not working")
+>>>>>>> b7e9a946b7e9745b8cac624f5d93b0534131d7ae
 }
 
 app.post(
