@@ -47,7 +47,7 @@ const {check, validationResult} = require("express-validator");
 
 try {
     mongoose.connect(
-        "mongodb+srv://viniciustocchiodb:1234@myflixdb.22srpoj.mongodb.net/?retryWrites=true&w=majority",
+        "mongodb+srv://viniciustocchiodb:1234@myflixdb.22srpoj.mongodb.net/myFlixDB?retryWrites=true&w=majority",
         {
             useNewUrlParser: true,
             useUnifiedTopology: true,
@@ -62,7 +62,7 @@ try {
 app.post(
     "/users",
     [
-        check("Username", "Username is required").isLength({min: 5}),
+        check("Username", "Username should be at least 5 characters").isLength({min: 5}),
         check(
             "Username",
             "Username contains non alphanumeric characters - not allowed."

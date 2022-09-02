@@ -159,3 +159,4 @@ Timestamp: Fri Jul 01 2022 17:15:49 GMT+0200 (Central European Summer Time)
 127.0.0.1 - - [30/Aug/2022:14:13:49 +0000] "GET /movies HTTP/1.1" 201 314 "http://localhost:1234/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
 127.0.0.1 - - [02/Sep/2022:05:50:55 +0000] "GET /movies HTTP/1.1" 201 2 "-" "PostmanRuntime/7.29.2"
 127.0.0.1 - - [02/Sep/2022:05:54:25 +0000] "GET /login HTTP/1.1" 404 144 "-" "PostmanRuntime/7.29.2"
+127.0.0.1 - - [02/Sep/2022:07:11:09 +0000] "GET /movies HTTP/1.1" 201 7464 "-" "PostmanRuntime/7.29.2"
