@@ -58,7 +58,6 @@ try {
 
 }
 
-
 app.post(
     "/users",
     [
@@ -112,7 +111,7 @@ app.post(
 
 app.post(
     "/movies",
-    //passport.authenticate("jwt", { session: false }),
+    passport.authenticate("jwt", { session: false }),
     (req, res) => {
         try {
             Movies.create({
