@@ -279,10 +279,10 @@ app.put(
       { Username: req.params.username },
       {
         $set: {
-          username: req.body.username,
-          password: req.body.password,
-          email: req.body.email,
-          birthday: req.body.birthday,
+          Username: req.body.username,
+          Password: req.body.password,
+          Email: req.body.email,
+          Birthday: req.body.birthday,
           FavouriteMovies: req.body.FavouriteMovies,
         },
       },
