@@ -272,21 +272,20 @@ app.get(
 
 // Update user's info by username
 app.put(
-  "/users/:username",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+  '/users/:Username',
+  passport.authenticate('jwt', {session: false}), (req, res) => {
+  let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate(
-      { Username: req.params.username },
+      { Username: req.params.Username },
       {
         $set: {
-          Username: req.body.username,
-          Password: req.body.password,
-          Email: req.body.email,
-          Birthday: req.body.birthday,
-          FavouriteMovies: req.body.FavouriteMovies,
+          Username: req.body.Username,
+          Password: hashedPassword,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday,
         },
       },
-      { new: true }, // This line makes sure that the updated document is returned
+      { new: true }, 
       (err, updatedUser) => {
         if (err) {
           console.error(err);
@@ -295,9 +294,9 @@ app.put(
           res.json(updatedUser);
         }
       }
-    );
-  }
-);
+  );
+});
+
 
 // add a movie to user's list of favourites
 app.post(
