@@ -18,6 +18,9 @@ let allowedOrigins = [
 //   "http://localhost:4200",
 ];
 
+const cors = require('cors');
+app.use(cors())
+
 // app.use(
 //   cors({
 //     origin: (origin, callback) => {
