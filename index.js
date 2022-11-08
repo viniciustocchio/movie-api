@@ -181,6 +181,21 @@ app.get("/documentation", (req, res) => {
 
 app.use(express.static("public"));
 
+app.get('/users/:Username/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Users.findOne({ Username: req.params.Username })
+      .then((user) => {
+          if (user) { // If a user with the corresponding username was found, return user info
+              res.status(200).json(user.FavouriteMovies);
+          } else {
+              res.status(400).send('Could not find favorite movies for this user');
+          };
+      })
+      .catch((err) => {
+          console.error(err);
+          res.status(500).send('Error: ' + err);
+      });
+});
+
 //READ - Shows a list of all the movies
 app.get(
   "/users",
@@ -257,20 +272,6 @@ app.get(
   }
 );
 
-app.get(
-  "/users/:Username",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Users.findOne({ Username: req.params.Username })
-      .then((user) => {
-        res.json(user);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      });
-  }
-);
 
 // Update user's info by username
 app.put(
